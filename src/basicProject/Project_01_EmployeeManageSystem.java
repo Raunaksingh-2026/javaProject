@@ -6,16 +6,27 @@ import java.util.Scanner;
 Employee Management System [ --Version 1 ]->
 Features:
     1. Add Employee
-    2. Show Employee
-    3. Search Employee
-    4. Delete Employee (Pending)
+    2. Show All Employee
+    3. Search Employee By ID
+    4. Update Employee Details (Upcoming)
+    5. Delete Employee (Upcoming)
+    6. Count Employees Using Recursion (Upcoming)
+    7. Employee Statistics (Upcoming)
 Concepts Used:
-    - Scanner
+    - Scanner Class
     - 2D Arrays
     - Methods
     - Loops
     - Switch Case
+    - Recursion
     - Conditional Statements
+    - Table Formatting using printf()
+Future Improvements:
+    - Search By Name
+    - Data Validation
+    - Employee Statistics
+    - File Handling
+    - Database Integration (JDBC)
 */
 public class Project_01_EmployeeManageSystem {
 
@@ -38,10 +49,10 @@ public class Project_01_EmployeeManageSystem {
 
 ///        Main menu loop keeps running until user chooses Exit
         while (true) {
-            System.out.printf(" %-28s %-28s %-28s \n", "1. Show All Employee Detail", "2. Add Employee", "3. Quit");
-            System.out.print("\nWhich Function you want to use : ");
+            System.out.printf(" %-28s %-28s %-28s \n", "1. Show All Employee Detail", "2. Add Employee", "3. Search employee");
+            System.out.printf(" %-28s %-28s \n", "4. Delete Employee (Upcoming)", "5. Quit");
+            System.out.print("\nChoose an Option : ");
             int option = scanInput.nextInt();
-
             switch (option) {
                 case 1:
                     System.out.println("Detail of All Employee : ");
@@ -54,6 +65,11 @@ public class Project_01_EmployeeManageSystem {
                     break;
 
                 case 3:
+                    System.out.println("Searching Employee by ID");
+                    searchEmployeeById(employeeDetail);
+                    break;
+
+                case 5:
                       System.out.println("Thank you");
                       return;
 
@@ -166,4 +182,43 @@ public class Project_01_EmployeeManageSystem {
 */
     }
 
+    public static void searchEmployeeById(String[][] employeeDetail) {
+        int totalEmployees = employeeDetail.length; // for Obtain no. of ROWS
+        int totalFields = employeeDetail[0].length; // For Obtain no. of COLUMN
+        System.out.print("Enter Employee ID Wants to Search : ");
+        int employeeId = scanInput.nextInt(); // Employee ID directly maps to array row index
+
+///        Prevent invalid array access
+        if (employeeId <= 0 || employeeId >= totalEmployees) {
+            System.out.println("Employee Not Found....");
+            return;
+        }
+        if (employeeDetail[employeeId][1] == null) {
+            System.out.println("Employee Not Found...");
+            return;
+        }
+//        Display Employee Detail Header
+        for (int i = 0; i < 1; i++) {
+            System.out.println("+------+--------+-------+--------------+");
+            for (int j = 0; j < totalFields; j++) {
+                System.out.print("|  " + employeeDetail[i][j] + "  ");
+            }
+            System.out.println("|");
+        }
+        System.out.println("+------+--------+-------+--------------+");
+//        Display employee Detail Record
+        for (int i = employeeId; i == employeeId; i++) {
+            System.out.print("|  " + i + "  ");
+            for (int j = 1; j < totalFields; j++) { // Responsible for Printing Attribute of That Rows
+                System.out.print("|  " + employeeDetail[i][j] + "  ");
+            }
+            System.out.println("|");
+        }System.out.println("+------+--------+-------+--------------+");
+
+/**
+ -> Still Remain
+ □ Check if employee actually exists -> IMPLEMENTED SUCCESSFULLY
+ □ Search by Name
+ */
+    }
 }
