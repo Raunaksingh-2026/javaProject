@@ -8,7 +8,7 @@ Features:
     1. Add Employee
     2. Show All Employee
     3. Search Employee By ID
-    4. Update Employee Details (Upcoming)
+    4. Update Employee Details
     5. Delete Employee (Upcoming)
     6. Count Employees Using Recursion (Upcoming)
     7. Employee Statistics (Upcoming)
@@ -50,7 +50,7 @@ public class Project_01_EmployeeManageSystem {
 ///        Main menu loop keeps running until user chooses Exit
         while (true) {
             System.out.printf(" %-28s %-28s %-28s \n", "1. Show All Employee Detail", "2. Add Employee", "3. Search employee");
-            System.out.printf(" %-28s %-28s \n", "4. Delete Employee (Upcoming)", "5. Quit");
+            System.out.printf(" %-28s %-28s \n", "4. Update Employee", "5. Quit");
             System.out.print("\nChoose an Option : ");
             int option = scanInput.nextInt();
             switch (option) {
@@ -67,6 +67,11 @@ public class Project_01_EmployeeManageSystem {
                 case 3:
                     System.out.println("Searching Employee by ID");
                     searchEmployeeById(employeeDetail);
+                    break;
+
+                case 4:
+                    System.out.println("Updating Employee Details");
+                    updateEmployee(employeeDetail, totalEmployees,totalFields);
                     break;
 
                 case 5:
@@ -112,7 +117,7 @@ public class Project_01_EmployeeManageSystem {
 //        }
         System.out.printf("| %-3s | %-15s | %-4s | %-13s |\n",
                 "ID", "NAME", "AGE", "MOBILE NO.");
-        System.out.println("+------+-----------------+------+---------------+");
+        System.out.println("+-----+-----------------+------+---------------+");
 
 //        Display employee Detail Values
         for (int i = 1; i < m; i++) { // Responsible for Iterating the Rows
@@ -126,12 +131,12 @@ public class Project_01_EmployeeManageSystem {
             }
             System.out.println("  |");
 */
-            System.out.printf("| %-4d | %-15s | %-4s | %-13s |\n", i,
+            System.out.printf("| %-3d | %-15s | %-4s | %-13s |\n", i,
                     employeeDetail[i][1],
                     employeeDetail[i][2],
                     employeeDetail[i][3]
             );
-        }System.out.println("+------+-----------------+------+---------------+");
+        }System.out.println("+-----+-----------------+------+---------------+");
 
 /**
         -> Still Remain
@@ -199,26 +204,72 @@ public class Project_01_EmployeeManageSystem {
         }
 //        Display Employee Detail Header
         for (int i = 0; i < 1; i++) {
-            System.out.println("+------+--------+-------+--------------+");
+            System.out.println("+-----+-----------------+------+---------------+");
+            /*
             for (int j = 0; j < totalFields; j++) {
                 System.out.print("|  " + employeeDetail[i][j] + "  ");
             }
             System.out.println("|");
+            */
+            System.out.printf("| %-3s | %-15s | %-4s | %-13s |\n",
+                    "ID", "NAME", "AGE", "MOBILE NO.");
         }
-        System.out.println("+------+--------+-------+--------------+");
+        System.out.println("+-----+-----------------+------+---------------+");
 //        Display employee Detail Record
         for (int i = employeeId; i == employeeId; i++) {
+/*
             System.out.print("|  " + i + "  ");
             for (int j = 1; j < totalFields; j++) { // Responsible for Printing Attribute of That Rows
                 System.out.print("|  " + employeeDetail[i][j] + "  ");
             }
             System.out.println("|");
-        }System.out.println("+------+--------+-------+--------------+");
+*/
+            System.out.printf("| %-3d | %-15s | %-4s | %-13s |\n", i,
+                    employeeDetail[i][1],
+                    employeeDetail[i][2],
+                    employeeDetail[i][3]
+            );
+        }System.out.println("+-----+-----------------+------+---------------+");
 
 /**
  -> Still Remain
  □ Check if employee actually exists -> IMPLEMENTED SUCCESSFULLY
  □ Search by Name
  */
+    }
+
+    public static void updateEmployee(String[][] employeeDetail, int totalEmployees, int totalFields) {
+
+        System.out.println("Enter Employee ID wants to Update : ");
+        int employeeIdToUpdate = scanInput.nextInt();
+
+        if (employeeIdToUpdate <= 0 || employeeIdToUpdate >= totalEmployees) {
+            System.out.println("No Such ID Available...");
+        } else if (employeeDetail[employeeIdToUpdate][1] == null) {
+            System.out.println("Employee Not available...");
+        } else {
+            System.out.println("Employee Founded...");
+            System.out.print("Which Detail Wants to Update : ");
+            String wantsToUpdate = scanInput.next();
+            if (wantsToUpdate.equalsIgnoreCase("NAME")) {
+                System.out.print("Plzz Enter New NAME : ");
+                String newName = scanInput.next();
+                employeeDetail[employeeIdToUpdate][1] = newName;
+                System.out.println("Employee's Name Updated");
+
+            } else if (wantsToUpdate.equalsIgnoreCase("AGE")) {
+                System.out.print("Plzz Enter New AGE : ");
+                String newAge = String.valueOf(scanInput.nextByte());
+                employeeDetail[employeeIdToUpdate][2] = newAge;
+                System.out.println("Employee's Age Updated");
+
+            }else if (wantsToUpdate.equalsIgnoreCase("MOBILE NO")) {
+                System.out.print("Plzz Enter New MOBILE NO. : ");
+                String newMobile = String.valueOf(scanInput.nextLong());
+                employeeDetail[employeeIdToUpdate][3] = newMobile;
+                System.out.println("Employee's Mobile No. Updated");
+
+            }else System.out.println("Invalid Detail");
+        }
     }
 }
