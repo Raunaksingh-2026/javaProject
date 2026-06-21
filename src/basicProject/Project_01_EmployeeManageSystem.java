@@ -10,8 +10,8 @@ Features:
     3. Search Employee By ID
     4. Update Employee Details
     5. Delete Employee
-    6. Count Employees Using Recursion (Upcoming)
-    7. Employee Statistics (Upcoming)
+    6. Count Employees Using Recursion
+    7. Employee Statistics
 Concepts Used:
     - Scanner Class
     - 2D Arrays
@@ -32,6 +32,7 @@ public class Project_01_EmployeeManageSystem {
 
     // Shared Scanner object used throughout the application
     private static final Scanner scanInput = new Scanner(System.in);
+
     public static void main(String[] args) {
 
         System.out.println("+++++++ Welcome to Employee Management System +++++++++ \n");
@@ -50,7 +51,8 @@ public class Project_01_EmployeeManageSystem {
 ///        Main menu loop keeps running until user chooses Exit
         while (true) {
             System.out.printf(" %-28s %-28s %-28s \n", "1. Show All Employee Detail", "2. Add Employee", "3. Search employee");
-            System.out.printf(" %-28s %-28s %-28s \n", "4. Update employee", "5. Delete Employee", "6. Quit");
+            System.out.printf(" %-28s %-28s %-28s \n", "4. Update employee", "5. Delete Employee", "6. Count Employee");
+            System.out.printf(" %-28s %-28s \n", "7. Statistics Of Employee", "8. Quit");
             System.out.print("\nChoose an Option : ");
             int option = scanInput.nextInt();
             switch (option) {
@@ -80,6 +82,17 @@ public class Project_01_EmployeeManageSystem {
                     break;
 
                 case 6:
+                    System.out.println("Counting Operation Running");
+                    int count = countEmployeeRecursively(employeeDetail, 1);
+                    System.out.println("Total Employee Is -> " + count);
+                    break;
+
+                case 7:
+                    System.out.println("Statistical Operation Running");
+                    employeeStatistics(employeeDetail);
+                    break;
+
+                case 8:
                       System.out.println("Thank you");
                       return;
 
@@ -154,7 +167,7 @@ public class Project_01_EmployeeManageSystem {
 
         int maxEmployees = employeeDetail.length;
         int totalFields = employeeDetail[0].length;
-        System.out.print("How Many Employee U Wants to Add: ");
+        System.out.print("How Many Employees Do You Want To Add? : ");
         int numberOfEmployee = scanInput.nextInt();
         int insertedEmployees = 0; /// Count successfully inserted employee records
 
@@ -239,7 +252,7 @@ public class Project_01_EmployeeManageSystem {
         -> Still Remain
         □ Check if employee actually exists -> IMPLEMENTED SUCCESSFULLY
         □ Search by Name
- */
+*/
     }
 
     public static void updateEmployee(String[][] employeeDetail, int totalEmployees, int totalFields) {
@@ -252,7 +265,7 @@ public class Project_01_EmployeeManageSystem {
         } else if (employeeDetail[employeeIdToUpdate][1] == null) {
             System.out.println("Employee Not available...");
         } else {
-            System.out.println("Employee Founded...");
+            System.out.println("Employee Found...");
             System.out.print("Which Detail Wants to Update : ");
             String wantsToUpdate = scanInput.next();
             if (wantsToUpdate.equalsIgnoreCase("NAME")) {
@@ -294,5 +307,61 @@ public class Project_01_EmployeeManageSystem {
             }
             System.out.println("Deleted Data Of Employee ID : " + employeeIdToDelete);
         }
+    }
+
+    public static int countEmployeeRecursively(String[][] employeeDetail, int rows) {
+
+//        Base case if counting pointer pointing to last Rows
+        if (rows == employeeDetail.length) {
+            return 0;
+        }
+
+//        Updating case If counting Pointer to NOT NULL Rows
+        if (employeeDetail[rows][1] != null) {
+            return 1 + countEmployeeRecursively(employeeDetail, rows + 1);
+        }
+
+//        Non-updating case If counting Pointer to NULL Rows
+        return countEmployeeRecursively(employeeDetail, rows + 1);
+    }
+
+    public static int countEmployee(String[][] employeeDetail) {
+        int totalEmployees = 0;
+
+        for (int i = 1; i < employeeDetail.length; i++) {
+            if (employeeDetail[i][1] != null) {
+                totalEmployees = 1 + totalEmployees;
+            }
+        }
+        return totalEmployees;
+    }
+    public static void employeeStatistics(String[][] employeeDetail) {
+        int sumOfEmployeesAge = 0;
+        int highestAge = 0;
+        int lowestAge = 0;
+
+        System.out.println("Counting Start...");
+        int total = countEmployee(employeeDetail);
+        System.out.println("Total Employees : " + total + "\nCounting Complete");
+
+        for (int i = 1; i < employeeDetail.length; i++) {
+            if (employeeDetail[i][1] != null) {
+                sumOfEmployeesAge = sumOfEmployeesAge + Integer.parseInt(employeeDetail[i][2]);
+            }
+        }
+        if (total == 0) {
+            System.out.println("No Data Available");
+            return;
+        }else{
+            int average = Math.round((sumOfEmployeesAge)/total);
+            System.out.println("Average AGE of Employees is : " + average);
+        }
+/**
+        -> Still Remain
+        □ Total Employees -> IMPLEMENTED SUCCESSFULLY
+        □ Average Age -> IMPLEMENTED SUCCESSFULLY
+        □ Oldest Employee
+        □ Youngest Employee
+*/
     }
 }
