@@ -1,5 +1,3 @@
-package basicProject;
-
 import java.util.Scanner;
 
 /*
@@ -50,8 +48,8 @@ public class Project_01_EmployeeManageSystem {
 
 ///        Main menu loop keeps running until user chooses Exit
         while (true) {
-            System.out.printf(" %-28s %-28s %-28s \n", "1. Show All Employee Detail", "2. Add Employee", "3. Search employee");
-            System.out.printf(" %-28s %-28s %-28s \n", "4. Update employee", "5. Delete Employee", "6. Count Employee");
+            System.out.printf("\n %-28s %-20s %-20s \n", "1. Show All Employee Detail", "2. Add Employee", "3. Search employee");
+            System.out.printf(" %-28s %-20s %-20s \n", "4. Update employee", "5. Delete Employee", "6. Count Employee");
             System.out.printf(" %-28s %-28s \n", "7. Statistics Of Employee", "8. Quit");
             System.out.print("\nChoose an Option : ");
             int option = scanInput.nextInt();
@@ -62,42 +60,42 @@ public class Project_01_EmployeeManageSystem {
                     break;
 
                 case 2:
-                    System.out.println("Adding Employee Detail");
+                    System.out.println("Adding Employee Detail...");
                     addEmployee(employeeDetail);
                     break;
 
                 case 3:
-                    System.out.println("Searching Employee by ID");
+                    System.out.println("Searching Employee by ID...");
                     searchEmployeeById(employeeDetail);
                     break;
 
                 case 4:
-                    System.out.println("Updating Employee Details");
+                    System.out.println("Updating Employee Details...");
                     updateEmployee(employeeDetail, totalEmployees,totalFields);
                     break;
 
                 case 5:
-                    System.out.println("Deleting Operation Running");
+                    System.out.println("Delete Operation is Running...");
                     deleteEmployee(employeeDetail, totalEmployees, totalFields);
                     break;
 
                 case 6:
-                    System.out.println("Counting Operation Running");
+                    System.out.println("Counting Operation is Running...");
                     int count = countEmployeeRecursively(employeeDetail, 1);
                     System.out.println("Total Employee Is -> " + count);
                     break;
 
                 case 7:
-                    System.out.println("Statistical Operation Running");
+                    System.out.println("Statistical Operation is  Running...");
                     employeeStatistics(employeeDetail);
                     break;
 
                 case 8:
-                      System.out.println("Thank you");
+                      System.out.println("Thanking you...");
                       return;
 
                 default:
-                    System.out.println("Invalid Option");
+                    System.out.println("Invalid Option!");
             }
         }
     }
@@ -340,9 +338,7 @@ public class Project_01_EmployeeManageSystem {
         int highestAge = 0;
         int lowestAge = 0;
 
-        System.out.println("Counting Start...");
         int total = countEmployee(employeeDetail);
-        System.out.println("Total Employees : " + total + "\nCounting Complete");
 
         for (int i = 1; i < employeeDetail.length; i++) {
             if (employeeDetail[i][1] != null) {
@@ -350,11 +346,13 @@ public class Project_01_EmployeeManageSystem {
             }
         }
         if (total == 0) {
-            System.out.println("No Data Available");
+            System.out.println("No Data Available!");
             return;
         }else{
             int average = Math.round((sumOfEmployeesAge)/total);
-            System.out.println("Average AGE of Employees is : " + average);
+
+            System.out.println("* Total Employees : " + total );
+            System.out.println("* Average AGE of Employees is : " + average);
         }
 /**
         -> Still Remain

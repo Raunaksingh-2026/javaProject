@@ -1,11 +1,13 @@
 ### IntelliJ IDEA ###
-out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .kotlin
 *.iml
 .idea/
+
+# Compiled files
 out/
+*.class
 
 ### Eclipse ###
 .apt_generated
