@@ -78,12 +78,16 @@ This project allows users to manage employee records through a menu-driven inter
 ```text
 EmployeeManagementSystem
 │
-├── src
-│   └── basicProject
-│       └── Project_01_EmployeeManageSystem.java
+├── images
+│    ├── main-menu.png
+│    ├── add-employee.png
+│    ├── show-employee.png
+│    └── statistic-menu.png
 │
-├── README.md
-└── .gitignore
+├── src
+│    └── Project_01_EmployeeManageSystem.java
+│
+└── README.md
 ```
 
 ## 📋 Menu Options
